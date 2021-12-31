@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
+import mongoose from 'mongoose'
+
 
 import MeetupList from '../components/meetups/MeetupList';
+const connectionString = "mongodb+srv://sohaib:753156@cluster0.yvpgc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+var db = mongoose.connection;
 
 function AllMeetupsPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,8 +13,9 @@ function AllMeetupsPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      'https://react-getting-started-f31c5-default-rtdb.firebaseio.com/meetups.json'
+    mongoose.connect(connectionString, {useUnifiedTopology: true, useNewUrlPArser: true});
+    db.Books.find(
+      { }
     )
       .then((response) => {
         return response.json();
